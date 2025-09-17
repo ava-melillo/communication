@@ -1,0 +1,2 @@
+# communication
+Estamos conectados de mais maneiras do que imaginamos. A conexão emocional que temos com alguém distante agora se mantém através da conexão de internet, que só existe graças a centenas de quilômetros de fiação nos conectando fisicamente, com cabos espalhados sobre as cidades e imersos no fundo de oceanos. Milhões de pessoas do passado e do presente cuidadosamente construíram as estruturas que nos possibilitam essa conexão. Mas o que fazemos quando o mundo inteiro está ao alcance dos dedos? O que você transmite?
