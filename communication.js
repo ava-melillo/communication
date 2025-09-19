@@ -2,7 +2,7 @@ var input;
 var button;
 var fontSize = 12;
 var curveRadius = 1500;
-var textDatabase = ["transmissão"];
+var textDatabase = ["transmissão", "oieeeee ihihihihiiiii td bommm", "o que é isso?", "eu morro de medo dessas coisas gente kkkk eu não entendi isso aqui nao"];
 var network;
 var signalIndex = 0;
 

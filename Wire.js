@@ -8,6 +8,10 @@ class Wire {
     this.textColor = 0;
     this.arcLength = this.curveRadius /1.5;
     
+    this.transition = false;
+    this.transitionIndex = 0;
+    this.movementIndex = 0;
+    
     this.fullWireText = [];
     
     let i = 0;
@@ -21,7 +25,7 @@ class Wire {
     }
     
     this.fullWireText = this.fullWireText.join("");
-    print(this.fullWireText);
+    //print(this.fullWireText);
   }
   
   ShowWire(curveCenter_x, curveCenter_y, signalIndex) {
@@ -36,7 +40,12 @@ class Wire {
     let endPosition = ((PI/2 * this.curveRadius) + this.arcLength/2) * -1;
    
     this.ShowMessage(letterPosition, endPosition, signalIndex, curveCenter_x, curveCenter_y);
-      
+    
+    if (frameCount % 2 == 0){
+    
+      this.fullWireText = this.text.charAt(this.text.length - (this.movementIndex % this.text.length) - 1) + this.fullWireText.slice(0, -1);
+      this.movementIndex++;
+    }
   }
   
   ShowMessage(letterPosition, endPosition, signalIndex, x, y){
@@ -49,7 +58,7 @@ class Wire {
       
       if (arclength < endPosition) return;
       
-      if (i == (signalIndex % this.fullWireText.length)) fill(190);
+      if (i == (signalIndex % this.fullWireText.length)) fill(220);
       
       // Instead of a constant width, we check the width of each character.
       var currentChar = this.fullWireText.charAt(i);
@@ -60,7 +69,7 @@ class Wire {
       
       // Angle in radians is the arclength divided by the radius
       // Starting on the bottom side of the circle by adding PI/2
-      var currentCharAngle = PI/2 + arclength / curveRadius;    
+      var currentCharAngle = PI/2 + arclength / curveRadius; 
   
       push();
      
@@ -70,10 +79,25 @@ class Wire {
       text(currentChar, 0, this.curveRadius);
       pop();
       // Move halfway again
-      arclength -= charWidth/2;
+      arclength -= charWidth/2; 
       fill(0)
     }
     
   }
-
+  
+  HandleNewMessage(){
+  
+    if (this.transition == true){
+    
+      this.fullWireText = this.text.charAt(this.text.length - (this.transitionIndex % this.text.length) - 1) + this.fullWireText.slice(0, -1);
+      this.transitionIndex++;
+      
+      print(this.transitionIndex + " " + this.fullWireText.length);
+      
+      if (this.transitionIndex >= this.fullWireText.length){
+      
+        this.transition = false;
+      }
+    }
+  }
 }
