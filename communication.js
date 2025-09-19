@@ -1,7 +1,7 @@
 var input;
 var button;
-var fontSize = 30;
-var curveRadius = 400;
+var fontSize = 12;
+var curveRadius = 1300;
 
 var wires = [];
 
@@ -12,9 +12,9 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   input = createInput();
   input.size(1000);
-  input.position(windowWidth/2 - input.width/2, windowHeight/2);
+  input.position(windowWidth/2 - input.width/2, windowHeight - 100);
   button = createButton("send.");
-  button.position(windowWidth/2 + input.width/2 + 10, windowHeight/2);
+  button.position(windowWidth/2 + input.width/2 + 10, windowHeight - 100);
   button.mousePressed(showMessages);
   
   noStroke();

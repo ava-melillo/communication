@@ -6,7 +6,7 @@ class Wire {
     this.size = size;
     this.curveRadius = curveRadius;
     this.textColor = 0;
-    this.arcLength = this.curveRadius;
+    this.arcLength = this.curveRadius /1.5;
     
   }
   
@@ -18,53 +18,55 @@ class Wire {
     fill(this.textColor);
    
     // Start in the center
-    translate(width / 2, height / 2 );
     
-    let currentAngle = this.arcLength/this.curveRadius/2 ;
-    let endAngle = this.arcLength/this.curveRadius/2 * -1;
-     this.ShowMessage(currentAngle);
+    
+    //this.ShowMessage(letterPosition);
+    for (let i = 0; i < 6; i++){
+     
+    let letterPosition = ((PI * this.curveRadius) - this.arcLength)/-2 ;
+    let endPosition = ((PI/2 * this.curveRadius) + this.arcLength/2) * -1;
    
-    /*
-    while (currentAngle > endAngle){
-    
-      this.ShowMessage(currentAngle);
-      currentAngle -= textWidth(this.text)/this.curveRadius;
+      while ( letterPosition > endPosition ){
+      
+        this.ShowMessage(letterPosition, windowWidth/2, windowHeight/2 - this.curveRadius + i*50);
+        
+        letterPosition -= textWidth(this.text) + textWidth(" ");
+        
+      }
+      
     }
-    */
     
   }
   
-  ShowMessage(currentAngle){
+  ShowMessage(letterPosition, x, y){
   
-    //rotate(0.2);
     // We must keep track of our position along the curve
-    var arclength = 0 - textWidth(this.text)/2;
-  
+    var arclength = letterPosition;
+     print(y)
     // For every box
-    for (var i = this.text.length ; i >= 0 ; i-- )  {
+    for (var i = 0 ; i < this.text.length ; i++ )  {
       // Instead of a constant width, we check the width of each character.
       var currentChar = this.text.charAt(i);
       var charWidth = textWidth( currentChar );
   
       // Each box is centered so we move half the width
-      arclength += charWidth/2;
+      arclength -= charWidth/2;
       
       // Angle in radians is the arclength divided by the radius
-      // Starting on the left side of the circle by adding PI
+      // Starting on the bottom side of the circle by adding PI/2
       var currentCharAngle = PI/2 + arclength / curveRadius;    
   
       push();
-      // Polar to cartesian coordinate conversion
-      translate(this.curveRadius * cos(currentCharAngle), this.curveRadius * sin(currentCharAngle));
-      // Rotate the box
-      rotate(currentCharAngle+PI*1.5); // rotation is offset by 90 degrees
+     
+      translate(x, y);     
+      rotate(currentCharAngle); // rotation is offset by 90 degrees
       // Display the character
-      text(currentChar, 0, 0);
+      text(currentChar, 0, this.curveRadius);
       pop();
       // Move halfway again
-      arclength += charWidth/2;
+      arclength -= charWidth/2;
     }
     
   }
-    
+
 }
