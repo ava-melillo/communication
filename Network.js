@@ -49,6 +49,7 @@ class Network {
     let newMessageIndex = int(random(this.wires.length - 1));
     this.wires[newMessageIndex].text = newMessage + " ";
     this.wires[newMessageIndex].transition = true;
-    print("ta rodando legal");
   }
+  
+
 }

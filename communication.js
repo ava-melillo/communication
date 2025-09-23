@@ -2,7 +2,7 @@ var input;
 var button;
 var fontSize = 12;
 var curveRadius = 1500;
-var textDatabase = ["transmissão", "oieeeee ihihihihiiiii td bommm", "o que é isso?", "eu morro de medo dessas coisas gente kkkk eu não entendi isso aqui nao"];
+var textDatabase = ["transmissão", "oieeeee ihihihihiiiii td bommm", "o que é isso?", "eu morro de medo dessas coisas gente kkkk eu não entendi isso aqui", "ieal platonico de um cchorro", "hoje acordei com dedos..."];
 var network;
 var signalIndex = 0;
 
@@ -48,6 +48,28 @@ function addNewMessage(){
   ));  
   
   network.addNewMessage(input.value());
+}
+
+function signalEffect(x, y){
+
+  let maxDiameter = 100;
+  let opacity = 255;
+  let step = opacity/maxDiameter;
+  
+  for (let i = 0; i < maxDiameter; i++){
+  
+    push()
+    
+
+    //stroke(0, 0, 0, opacity)
+    circle(x, y, i);
+    
+    opacity -= step;
+    //stroke();
+    
+    pop()
+    
+  }
 }
 
 function windowResized() {

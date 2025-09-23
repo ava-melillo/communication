@@ -11,6 +11,7 @@ class Wire {
     this.transition = false;
     this.transitionIndex = 0;
     this.movementIndex = 0;
+    this.position = { x: null, y: null};
     
     this.fullWireText = [];
     
@@ -40,6 +41,9 @@ class Wire {
     let endPosition = ((PI/2 * this.curveRadius) + this.arcLength/2) * -1;
    
     this.ShowMessage(letterPosition, endPosition, signalIndex, curveCenter_x, curveCenter_y);
+    
+    this.position.x = curveCenter_x - this.arcLength/2;
+    this.position.y = curveCenter_y + this.curveRadius/1.2;
     
     if (frameCount % 2 == 0){
     
