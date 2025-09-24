@@ -2,43 +2,57 @@ var input;
 var button;
 var fontSize = 12;
 var curveRadius = 1500;
-var textDatabase = ["transmissão", "oieeeee ihihihihiiiii td bommm", "o que é isso?", "eu morro de medo dessas coisas gente kkkk eu não entendi isso aqui", "ieal platonico de um cchorro", "hoje acordei com dedos..."];
+var textDatabase = ["hoje sonhei que eu tava fazendo pão", "transmissão", "oieeeee ihihihihiiiii td bommm", "o que é isso?", "eu morro de medo dessas coisas gente kkkk eu não entendi isso aqui", "ieal platonico de um cchorro", "hoje acordei com dedos..."];
 var network;
 var signalIndex = 0;
 
 var wires = [];
 var towerImg;
+var backgroundImg;
 
 function preload() {
-  towerImg = loadImage('tower.png');
+  
+  backgroundImg = loadImage('Background2.jpg');
+  towerImg = loadImage('poste.png');
 }
 
 function setup() {
 
-  background(255);
+  image(backgroundImg, 0, 0);
   noStroke();
   createCanvas(windowWidth, windowHeight);
   input = createInput();
-  input.size(1000);
-  input.position(windowWidth/2 - input.width/2, windowHeight - 70);
+  input.size(600);
+  input.position(windowWidth/2 - input.width/2, windowHeight - 100);
   button = createButton("send.");
-  button.position(windowWidth/2 + input.width/2 + 10, windowHeight - 70);
-  button.mousePressed(addNewMessage); 
+  button.position(windowWidth/2 + input.width/2 + 10, windowHeight - 100);
+  button.mousePressed(sendNewMessage); 
   noStroke();
   
   network = new Network(textDatabase, fontSize, curveRadius, towerImg);
-
+  
+  if (backgroundImg.width/backgroundImg.height > windowWidth/windowHeight){
+    backgroundImg.resize(0, windowHeight);
+  }
+  else{
+  
+    backgroundImg.resize(windowWidth, 0);
+  }
 }
 
 function draw() {
   
+  //background(255);
+  image(backgroundImg, 0, 0);
   network.showNetwork(signalIndex);
-  signalIndex++;
+  signalIndex += 3;
 
 }
 
-function addNewMessage(){
+function sendNewMessage(){
 
+  if (input.value() == "") return;
+  
   textDatabase.push( new Wire(
   
     input.value(),
@@ -50,28 +64,37 @@ function addNewMessage(){
   network.addNewMessage(input.value());
 }
 
-function signalEffect(x, y){
 
-  let maxDiameter = 100;
-  let opacity = 255;
-  let step = opacity/maxDiameter;
-  
-  for (let i = 0; i < maxDiameter; i++){
-  
-    push()
-    
 
-    //stroke(0, 0, 0, opacity)
-    circle(x, y, i);
-    
-    opacity -= step;
-    //stroke();
-    
-    pop()
-    
+function loadData(database){
+
+  messages = [];
+  let i = 0;
+  for(let message of messagesData){
+  
+    messages[i]  = message.text();
+  }
+}
+
+function keyPressed() {
+
+  if (keyCode === ENTER) {
+    sendNewMessage();
   }
 }
 
 function windowResized() {
+  
   resizeCanvas(windowWidth, windowHeight);
+  
+  input.position(windowWidth/2 - input.width/2, windowHeight - 100);
+  button.position(windowWidth/2 + input.width/2 + 10, windowHeight - 100);
+  
+  if (backgroundImg.width/backgroundImg.height > windowWidth/windowHeight){
+    backgroundImg.resize(0, windowHeight);
+  }
+  else{
+  
+    backgroundImg.resize(windowWidth, 0);
+  }
 }
