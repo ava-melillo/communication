@@ -20,18 +20,18 @@ class Wire {
     this.signalRadius = 1;
     this.signalMaxRadius = 100;
     
-    let edgeOffsetX = sin(this.arcLength/2/this.curveRadius) * this.curveRadius
-    let edgeOffsetY = cos(this.arcLength/2/this.curveRadius) * this.curveRadius
+    this.edgeOffsetX = sin(this.arcLength/2/this.curveRadius) * this.curveRadius
+    this.edgeOffsetY = cos(this.arcLength/2/this.curveRadius) * this.curveRadius
     
     this.edgePosition = {
       
       left: {
-        x: this.position.x - edgeOffsetX,
-        y: this.position.y + edgeOffsetY},
+        x: this.position.x - this.edgeOffsetX,
+        y: this.position.y + this.edgeOffsetY},
         
       right: {
-        x: this.position.x + edgeOffsetX,
-        y: this.position.y + edgeOffsetY},
+        x: this.position.x + this.edgeOffsetX,
+        y: this.position.y + this.edgeOffsetY},
     }
     
     this.fullWireText = [];

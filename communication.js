@@ -24,8 +24,11 @@ function preload() {
 
 function setup() {
   
+  //fontSize *= windowWidth/1920;
+  curveRadius *= windowWidth/1920;
   getAudioContext().suspend();
-
+  document.body.style.overflow = 'hidden';
+  print(windowWidth);
   image(backgroundImg, 0, 0);
   noStroke();
   createCanvas(windowWidth, windowHeight);

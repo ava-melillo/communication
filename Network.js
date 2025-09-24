@@ -7,8 +7,7 @@ class Network {
     this.curveRadius = curveRadius;
     this.nRows = 11;
     this.nColumns = 3;
-    this.spacing_x = curveRadius/1.5 + img.width - 20;
-    this.spacing_y = 54;
+    this.spacing_y = 54 * windowWidth/1920;
     this.wires = [];
     this.img = img
         
@@ -20,8 +19,12 @@ class Network {
         fontSize,
         curveRadius,
         windowWidth/2,
-        windowHeight/2 - this.curveRadius * 1.2 + (i * this.spacing_y) - 5))
+        this.curveRadius * -1 + (i * this.spacing_y) + 200 * (windowWidth/1920))
+      )
     } 
+    
+    this.spacing_x = int(this.wires[0].edgeOffsetX * 2 + 20);
+
   }
   
   showNetwork(signalIndex){
@@ -32,7 +35,7 @@ class Network {
     
     for (let a = 0; a < this.nColumns; a++){
     
-      image(this.img, initialPosition_x - this.curveRadius/2.4 + a * this.spacing_x - 10, 50);
+      image(this.img, windowWidth/2 - this.spacing_x/2 - this.img.width/2 + (a * this.spacing_x), 50);
     }
     
     rect(0, this.img.height, windowWidth, 200);
