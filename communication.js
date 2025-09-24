@@ -63,7 +63,6 @@ function draw() {
 
 function sendNewMessage(){
 
-  
   if (input.value() == "") return;
   
   signalSound.play();
@@ -77,6 +76,7 @@ function sendNewMessage(){
   ));  
   
   network.addNewMessage(input.value());
+  input.value("");
 }
 
 
