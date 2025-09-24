@@ -24,9 +24,8 @@ function preload() {
 
 function setup() {
   
-  //fontSize *= windowWidth/1920;
   curveRadius *= windowWidth/1920;
-  print(windowHeight);
+  //print(windowHeight);
   getAudioContext().suspend();
   document.body.style.overflow = 'hidden';
   image(backgroundImg, 0, 0);
@@ -120,8 +119,8 @@ function windowResized() {
   
   resizeCanvas(windowWidth, windowHeight);
   
-  input.position(windowWidth/2 - input.width/2, windowHeight - 100);
-  button.position(windowWidth/2 + input.width/2 + 10, windowHeight - 100);
+  input.position(windowWidth/2 - input.width/2 - 10, windowHeight - 100 * windowHeight/1080);
+  button.position(windowWidth/2 + input.width/2, windowHeight - 100 * windowHeight/1080);
   
   if (backgroundImg.width/backgroundImg.height > windowWidth/windowHeight){
     backgroundImg.resize(0, windowHeight);

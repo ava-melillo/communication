@@ -5,7 +5,7 @@ class Network {
     this.textDatabase = shuffle(textDatabase);
     this.fontSize = fontSize;
     this.curveRadius = curveRadius;
-    this.nRows = 11 - (windowHeight/1080);
+    this.nRows = 11 - floor((1080 - windowHeight)/120);
     this.nColumns = 3;
     this.spacing_y = 54 * windowWidth/1920;
     this.wires = [];
