@@ -26,17 +26,17 @@ function setup() {
   
   //fontSize *= windowWidth/1920;
   curveRadius *= windowWidth/1920;
+  print(windowHeight);
   getAudioContext().suspend();
   document.body.style.overflow = 'hidden';
-  print(windowWidth);
   image(backgroundImg, 0, 0);
   noStroke();
   createCanvas(windowWidth, windowHeight);
   input = createInput();
-  input.size(600);
-  input.position(windowWidth/2 - input.width/2, windowHeight - 100);
+  input.size(750);
+  input.position(windowWidth/2 - input.width/2 - 10, windowHeight - 100 * windowHeight/1080);
   button = createButton("send.");
-  button.position(windowWidth/2 + input.width/2 + 10, windowHeight - 100);
+  button.position(windowWidth/2 + input.width/2, windowHeight - 100 * windowHeight/1080);
   button.mousePressed(sendNewMessage); 
   noStroke();
   
