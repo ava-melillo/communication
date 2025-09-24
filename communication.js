@@ -9,11 +9,17 @@ var signalIndex = 0;
 var wires = [];
 var towerImg;
 var backgroundImg;
+var signalSound;
+var keyPressSound;
+var backgroundSound;
 
 function preload() {
   
   backgroundImg = loadImage('Background2.jpg');
   towerImg = loadImage('poste.png');
+  signalSound = loadSound('Signal.mp3');
+  keyPressSound = loadSound('Keypress.mp3');
+  backgroundSound = loadSound('BackgroundNoise.mp3');
 }
 
 function setup() {
@@ -53,6 +59,8 @@ function sendNewMessage(){
 
   if (input.value() == "") return;
   
+  signalSound.play();
+  
   textDatabase.push( new Wire(
   
     input.value(),
@@ -76,10 +84,22 @@ function loadData(database){
   }
 }
 
+function backgroundNoise(){
+
+  backgroundSound.play();
+  backgroundSound.loop();
+  backgroundSound.setVolume(0.8);
+  userStartAudio();
+}
+
 function keyPressed() {
 
   if (keyCode === ENTER) {
     sendNewMessage();
+  }
+  else {
+  
+    keyPressSound.play();
   }
 }
 

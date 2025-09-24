@@ -12,6 +12,7 @@ class Wire {
     this.speed = 3;
     this.transition = false;
     this.transitionIndex = 0;
+    this.newMessageLength = null;
     this.movementIndex = 0;
     this.position = { x: centerPosX, y: centerPosY };
     
@@ -85,7 +86,7 @@ class Wire {
       
       if (arclength < endPosition) return;
       
-      if (this.transitionIndex > i && this.position.x == windowWidth/2) fill(255, 214, 100);
+      this.handleSignalColor(i);
       if (i == signalIndex % this.fullWireText.length) fill(255);
       
       // Instead of a constant width, we check the width of each character.
@@ -116,32 +117,63 @@ class Wire {
   
   HandleNewMessage(){
   
+    let transitionSpeed = 5;
+    
+    if (this.newMessageLength == null){
+    
+      let i = 0;
+      let j = 0;
+      this.newMessageLength = [];
+      
+      while (i < this.arcLength){
+    
+        this.newMessageLength.push(this.text.charAt(j));
+        i += textWidth(this.text.charAt(j));
+        j = (j + 1) % this.text.length
+      }
+    
+      this.newMessageLength = this.newMessageLength.join("");
+      this.newMessageLength = this.newMessageLength.length;
+    }
+    
     //caso tenha recebido uma nova mensagem,
     if (this.transition == true){
-       
-      //é criada uma variável com 1 char da string nova no começo, e 1 char a menos no final
-      let newWireText = this.text.charAt(this.text.length - (this.transitionIndex % this.text.length) - 1) + this.fullWireText.slice(0, -1);
       
-      //testa caso texto novo ultrapasse o tamanho do fio (acontece quando os caracteres novos sao maiores do que os anteriores, como capslock)
-      if ( textWidth(newWireText) > this.arcLength && this.transitionIndex < this.fullWireText.length){
+      if (this.transitionIndex - transitionSpeed < this.newMessageLength){
       
-        //ele nao coloca a frase nova, só retira a ultima letra
-        this.fullWireText = this.fullWireText.slice(0, -1)
+        let newWireText = "";
+        //é criada uma variável com 1 char da string nova no começo, e 1 char a menos no final
+        for (let i = 0; i < transitionSpeed; i++){
         
-        //caso a string nova esteja dentro do tamanho permitido
+          newWireText = this.text.charAt(this.text.length - ((this.transitionIndex + i) % this.text.length) - 1) + newWireText
+        }
+        
+        newWireText += this.fullWireText.slice(0, -1 * transitionSpeed);
+      
+        //testa caso texto novo ultrapasse o tamanho do fio (acontece quando os caracteres novos sao maiores do que os anteriores, como capslock)
+        if ( textWidth(newWireText) > this.arcLength){
+        
+          //ele nao coloca a frase nova, só retira a ultima letra
+          this.fullWireText = this.fullWireText.slice(0, -1)
+          
+          //caso a string nova esteja dentro do tamanho permitido
+        } else {
+        
+          //ela vira o novo texto do fio, dando a ilusao de que o texto novo empurra o texto antigo
+          print(newWireText);
+          this.fullWireText = newWireText;
+          this.transitionIndex += transitionSpeed;
+          
+          //print("WIRE TEXT LENGTH:  " + int(newWireText.length));
+          //print("WIRE TEXT WIDTH:   " + int(textWidth(newWireText)));
+          //print("WIRE WIDTH:        " + int(this.arcLength));
+        }
       } else {
-      
-        //ela vira o novo texto do fio, dando a ilusao de que o texto novo empurra o texto antigo
-        this.fullWireText = this.text.charAt(this.text.length - (this.transitionIndex % this.text.length) - 1) + this.fullWireText.slice(0, -1);
-        this.transitionIndex++;
-      }
-      
-      //caso ja tenha acabado a transicao, tanto em tamanho quanto em numero de caracteres
-      if (textWidth(newWireText) > this.arcLength && this.transitionIndex >= this.fullWireText.length){
-      
+        
         //a transicao termina
         this.transition = false;
         this.transitionIndex = 0;
+        this.newMessageLength = null;
         this.signalActive = false;
       }
     }
@@ -166,6 +198,22 @@ class Wire {
     
       this.signalActive = false;
       this.signalRadius = 1;
+    }
+  }
+  
+  handleSignalColor(i){
+  
+    let transitionFrames = 40
+    
+    if (this.transitionIndex > i){
+    
+      fill(255, 214, 100);
+      
+      if (this.transitionIndex > this.newMessageLength - transitionFrames && this.transition == true){
+  
+        fill((255/transitionFrames) * (this.newMessageLength - this.transitionIndex), (214/transitionFrames) * (this.newMessageLength - this.transitionIndex), (100/transitionFrames) * (this.newMessageLength - this.transitionIndex));
+  
+      }
     }
   }
 }
