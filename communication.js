@@ -23,6 +23,8 @@ function preload() {
 }
 
 function setup() {
+  
+  getAudioContext().suspend();
 
   image(backgroundImg, 0, 0);
   noStroke();
@@ -44,6 +46,8 @@ function setup() {
   
     backgroundImg.resize(windowWidth, 0);
   }
+  
+  backgroundNoise()
 }
 
 function draw() {
@@ -57,6 +61,7 @@ function draw() {
 
 function sendNewMessage(){
 
+  
   if (input.value() == "") return;
   
   signalSound.play();
@@ -88,8 +93,7 @@ function backgroundNoise(){
 
   backgroundSound.play();
   backgroundSound.loop();
-  backgroundSound.setVolume(0.8);
-  userStartAudio();
+  backgroundSound.setVolume(0.6);
 }
 
 function keyPressed() {
@@ -101,6 +105,12 @@ function keyPressed() {
   
     keyPressSound.play();
   }
+  
+  userStartAudio();
+}
+
+function mousePressed() {
+  userStartAudio();
 }
 
 function windowResized() {
