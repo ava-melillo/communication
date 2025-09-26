@@ -2,7 +2,6 @@ var input;
 var button;
 var fontSize = 12;
 var curveRadius = 1500;
-var textDatabase = ["hoje sonhei que eu tava fazendo pão", "transmissão", "oieeeee ihihihihiiiii td bommm", "o que é isso?", "eu morro de medo dessas coisas gente kkkk eu não entendi isso aqui", "ieal platonico de um cchorro", "hoje acordei com dedos..."];
 var network;
 var signalIndex = 0;
 
@@ -25,10 +24,11 @@ function preload() {
 function setup() {
   
   curveRadius *= windowWidth/1920;
+  textStyle(BOLD);
   //print(windowHeight);
   getAudioContext().suspend();
   document.body.style.overflow = 'hidden';
-  image(backgroundImg, 0, 0);
+  image(backgroundImg, 0, windowHeight - backgroundImg.height);
   noStroke();
   createCanvas(windowWidth, windowHeight);
   input = createInput();
@@ -49,7 +49,8 @@ function setup() {
     backgroundImg.resize(windowWidth, 0);
   }
   
-  backgroundNoise()
+  backgroundNoise();
+  signalSound.setVolume(1.5)
 }
 
 function draw() {
@@ -67,18 +68,12 @@ function sendNewMessage(){
   
   signalSound.play();
   
-  textDatabase.push( new Wire(
-  
-    input.value(),
-    fontSize,
-    curveRadius
-  
-  ));  
+  textDatabase.push(input.value());  
   
   network.addNewMessage(input.value());
   input.value("");
+  print(textDatabase);
 }
-
 
 
 function loadData(database){
@@ -95,7 +90,7 @@ function backgroundNoise(){
 
   backgroundSound.play();
   backgroundSound.loop();
-  backgroundSound.setVolume(0.6);
+  backgroundSound.setVolume(0.2);
 }
 
 function keyPressed() {
@@ -109,18 +104,23 @@ function keyPressed() {
   }
   
   userStartAudio();
+  fullscreen(true);
+
 }
 
 function mousePressed() {
   userStartAudio();
+  fullscreen(true);
+
 }
 
 function windowResized() {
   
   resizeCanvas(windowWidth, windowHeight);
-  
   input.position(windowWidth/2 - input.width/2 - 10, windowHeight - 100 * windowHeight/1080);
   button.position(windowWidth/2 + input.width/2, windowHeight - 100 * windowHeight/1080);
+  
+  //network.resizeNetwork();
   
   if (backgroundImg.width/backgroundImg.height > windowWidth/windowHeight){
     backgroundImg.resize(0, windowHeight);

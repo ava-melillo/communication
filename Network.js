@@ -7,10 +7,10 @@ class Network {
     this.curveRadius = curveRadius;
     this.nRows = 11 - floor((1080 - windowHeight)/120);
     this.nColumns = 3;
-    this.spacing_y = 54 * windowWidth/1920;
+    this.spacing_y = fontSize * 4 * windowWidth/1920;
     this.wires = [];
     this.img = img
-        
+    
     for (let i = 0; i < this.nRows; i++) {
     
       this.wires.push( new Wire( 
@@ -42,6 +42,7 @@ class Network {
   
     for (let i = 0; i < this.nRows; i++){
       
+      //print(this.wires[i]);
       this.wires[i].HandleNewMessage();
     
       for (let j = 0; j < this.nColumns; j++){
@@ -54,10 +55,37 @@ class Network {
   
   addNewMessage(newMessage){
   
-    let newMessageIndex = int(random(this.wires.length - 1));
+    let newMessageIndex = int(random(this.wires.length));
     this.wires[newMessageIndex].text = newMessage + " ";
     this.wires[newMessageIndex].transition = true;
   }
   
+  resizeNetwork(){
+  
+    //this.nRows = 11 - floor((1080 - windowHeight)/120);
+    this.spacing_y = fontSize * 4 * windowWidth/1920;
+    
+    let centerPosX = windowWidth/2;
+    
+    for (let i = 0; i < this.nRows; i++){
+    
+      let centerPosY = this.curveRadius * -1 + (i * this.spacing_y) + 200 * (windowWidth/1920)
 
+      if (this.wires[i] != undefined){
+      
+        this.wires[i] = (centerPosX, centerPosY);
+      }
+      else {
+      
+        this.wires.push( new Wire( 
+        
+          this.textDatabase[i % this.textDatabase.length],
+          this.fontSize,
+          this.curveRadius,
+          windowWidth/2,
+          this.curveRadius * -1 + (i * this.spacing_y) + 200 * (windowWidth/1920))
+        )
+      }
+    }
+  }
 }

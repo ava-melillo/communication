@@ -4,7 +4,7 @@ class Wire {
   
     this.text = text + " ";
     this.fontSize = size;
-    this.curveRadius = curveRadius ;
+    this.curveRadius = curveRadius;
     this.textColor = 0;
     this.arcLength = this.curveRadius /1.4 + 30;
     
@@ -160,7 +160,6 @@ class Wire {
         } else {
         
           //ela vira o novo texto do fio, dando a ilusao de que o texto novo empurra o texto antigo
-          print(newWireText);
           this.fullWireText = newWireText;
           this.transitionIndex += transitionSpeed;
           
@@ -215,5 +214,22 @@ class Wire {
   
       }
     }
+  }
+  
+  resizeWire(centerPosX, centerPosY){
+  
+    this.position = { x: centerPosX, y: centerPosY };
+    
+    this.edgePosition = {
+      
+    left: {
+      x: this.position.x - this.edgeOffsetX,
+      y: this.position.y + this.edgeOffsetY},
+        
+    right: {
+      x: this.position.x + this.edgeOffsetX,
+      y: this.position.y + this.edgeOffsetY},
+    }
+    
   }
 }
