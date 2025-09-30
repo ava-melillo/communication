@@ -8,7 +8,7 @@ var textDatabase = [
   'a vagabunda que falou mal da minha sobrancelha vai tomar no cu',
   'Anitta dona da chave de sodoma e gomorra',
   'IAN MEU AMRZINHO',
-  'MANU MINHA VIDINHA',
+  //'MANU MINHA VIDINHA',
   'pra quem voce ligaria se pudesse ligar pra qualquer pessoa agora',
   'sinto saudades do cheiro de buxinho do meu gato',
   'hoje sonhei que as minhas pernas nao eram minhas',
@@ -18,5 +18,6 @@ var textDatabase = [
   "oieeeee ihihihihiiiii td bommm",
   "ideal platonico de um cachorro",
   "hoje acordei com dedos...",
-  "SEM MOVIMENTO NÃO HÁ VIDA"
+  "SEM MOVIMENTO NÃO HÁ VIDA",
+  "chupa meu bucetao"
 ];

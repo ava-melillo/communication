@@ -1,6 +1,6 @@
 var input;
 var button;
-var fontSize = 12;
+var fontSize = 13;
 var curveRadius = 1500;
 var network;
 var signalIndex = 0;
@@ -24,7 +24,7 @@ function preload() {
 function setup() {
   
   curveRadius *= windowWidth/1920;
-  textStyle(BOLD);
+  //textStyle(BOLD);
   //print(windowHeight);
   getAudioContext().suspend();
   document.body.style.overflow = 'hidden';
