@@ -15,7 +15,7 @@ var backgroundSound;
 function preload() {
   
   let randBg = floor(random(2)) + 1;
-  randBg = "Background" + toString(randBg) + ".png";
+  randBg = "Background" + str(randBg) + ".png";
   
   backgroundImg = loadImage(randBg);
   towerImg = loadImage('poste.png');
