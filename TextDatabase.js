@@ -19,5 +19,6 @@ var textDatabase = [
   "ideal platonico de um cachorro",
   "hoje acordei com dedos...",
   "SEM MOVIMENTO NÃO HÁ VIDA",
-  "chupa meu bucetao"
+  "chupa meu bucetao",
+  "iiiiiiiiiiiii"
 ];

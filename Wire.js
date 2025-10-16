@@ -47,7 +47,7 @@ class Wire {
     }
     
     this.fullWireText = this.fullWireText.join("");
-    //print(this.fullWireText);
+    print(this.fullWireText);
   }
   
   ShowWire(curveCenter_x, signalIndex) {
@@ -62,6 +62,7 @@ class Wire {
     let endPosition = ((PI/2 * this.curveRadius) + this.arcLength/2) * -1;
    
     this.showMessage(letterPosition, endPosition, signalIndex, curveCenter_x, this.position.y);
+    //this.showLetters();
     
     if (this.transition == true){
       
@@ -75,6 +76,32 @@ class Wire {
       this.movementIndex++;
     }
   }
+  
+  showLetters(){
+  
+    let factor_x = (windowWidth-(2*this.edgePosition.left.x))/2;
+    
+    // implementação das letras com seno e cosseno
+    let convertAngle = -1*((this.arcLenght/this.curveRadius)/2); // inicia o desenho em -30 graus
+    
+    for(let i = 0; i <= this.fullWireText.length; i++){ // itera na string com o texto completo a ser mostrado no fio
+    
+      // converte a largura de cada caractere em um ângulo dentro do escopo definido anteriormente
+      let charWidthToAngle = map(textWidth(this.fullWireText.charAt(i)), 0, this.arcLength, 0, this.arcLength/this.curveRadius);
+      convertAngle += charWidthToAngle; // acrescenta o ângulo para desenhar a sequência de chars
+      
+      // define posições x e y com base no ângulo entre -30 e 30º multiplicando pelo diâmetro e fazendo correção
+      // de posicionamento (eixo Y não está correto)
+      let x = ((sin(radians(convertAngle))*factor_x*2)+(windowWidth/2));
+      let y = ((cos(radians(convertAngle))*factor_x*2)- 500);
+      push();
+        translate(x, y); // translação para a posição do caractere
+        rotate(radians(convertAngle)*-1); // rotação no eixo do caractere
+        text(this.fullWireText.charAt(i), -(textWidth(this.fullWireText.charAt(i))/2), 0); // desenha o caractere centralizando no eixo X
+      pop();
+    }
+  }
+  
   
   showMessage(letterPosition, endPosition, signalIndex, x, y){
   
@@ -133,6 +160,7 @@ class Wire {
       }
     
       this.newMessageLength = this.newMessageLength.join("");
+      print(this.newMessageLength)
       this.newMessageLength = this.newMessageLength.length;
     }
     
@@ -148,25 +176,18 @@ class Wire {
           newWireText = this.text.charAt(this.text.length - ((this.transitionIndex + i) % this.text.length) - 1) + newWireText
         }
         
-        newWireText += this.fullWireText.slice(0, -1 * transitionSpeed);
-      
-        //testa caso texto novo ultrapasse o tamanho do fio (acontece quando os caracteres novos sao maiores do que os anteriores, como capslock)
-        if ( textWidth(newWireText) > this.arcLength){
+        newWireText += this.fullWireText.slice(0, -1);
         
-          //ele nao coloca a frase nova, só retira a ultima letra
-          this.fullWireText = this.fullWireText.slice(0, -1)
-          
-          //caso a string nova esteja dentro do tamanho permitido
-        } else {
+        //ela vira o novo texto do fio, dando a ilusao de que o texto novo empurra o texto antigo
+        print("1- ", this.fullWireText)
+        print("2- ", newWireText)
+        this.fullWireText = newWireText;
+        this.transitionIndex += transitionSpeed;
         
-          //ela vira o novo texto do fio, dando a ilusao de que o texto novo empurra o texto antigo
-          this.fullWireText = newWireText;
-          this.transitionIndex += transitionSpeed;
-          
-          //print("WIRE TEXT LENGTH:  " + int(newWireText.length));
-          //print("WIRE TEXT WIDTH:   " + int(textWidth(newWireText)));
-          //print("WIRE WIDTH:        " + int(this.arcLength));
-        }
+        //print("WIRE TEXT LENGTH:  " + int(newWireText.length));
+        //print("WIRE TEXT WIDTH:   " + int(textWidth(newWireText)));
+        //print("WIRE WIDTH:        " + int(this.arcLength));
+        
       } else {
         
         //a transicao termina
@@ -174,6 +195,7 @@ class Wire {
         this.transitionIndex = 0;
         this.newMessageLength = null;
         this.signalActive = false;
+        
       }
     }
   }

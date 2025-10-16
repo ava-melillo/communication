@@ -38,7 +38,6 @@ class Network {
       image(this.img, windowWidth/2 - this.spacing_x/2 - this.img.width/2 + (a * this.spacing_x), 50);
     }
     
-    rect(0, this.img.height, windowWidth, 200);
   
     for (let i = 0; i < this.nRows; i++){
       

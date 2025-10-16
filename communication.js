@@ -14,7 +14,10 @@ var backgroundSound;
 
 function preload() {
   
-  backgroundImg = loadImage('Background2.jpg');
+  let randBg = floor(random(2)) + 1;
+  randBg = "Background" + toString(randBg) + ".png";
+  
+  backgroundImg = loadImage(randBg);
   towerImg = loadImage('poste.png');
   signalSound = loadSound('Signal.mp3');
   keyPressSound = loadSound('Keypress.mp3');
@@ -24,7 +27,7 @@ function preload() {
 function setup() {
   
   curveRadius *= windowWidth/1920;
-  //textStyle(BOLD);
+  textStyle(BOLD);
   //print(windowHeight);
   getAudioContext().suspend();
   document.body.style.overflow = 'hidden';
@@ -72,7 +75,7 @@ function sendNewMessage(){
   
   network.addNewMessage(input.value());
   input.value("");
-  print(textDatabase);
+  //print(textDatabase);
 }
 
 
@@ -104,13 +107,13 @@ function keyPressed() {
   }
   
   userStartAudio();
-  fullscreen(true);
+  //fullscreen(true);
 
 }
 
 function mousePressed() {
   userStartAudio();
-  fullscreen(true);
+  //fullscreen(true);
 
 }
 
