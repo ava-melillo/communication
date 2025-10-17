@@ -6,7 +6,8 @@ var network;
 var signalIndex = 0;
 
 var wires = [];
-var towerImg;
+var towerImgA;
+var towerImgB;
 var backgroundImg;
 var signalSound;
 var keyPressSound;
@@ -18,7 +19,8 @@ function preload() {
   randBg = "Background" + str(randBg) + ".png";
   
   backgroundImg = loadImage(randBg);
-  towerImg = loadImage('poste.png');
+  towerImgA = loadImage('poste1.png');
+  towerImgB = loadImage('poste2.png');
   signalSound = loadSound('Signal.mp3');
   keyPressSound = loadSound('Keypress.mp3');
   backgroundSound = loadSound('BackgroundNoise.mp3');
@@ -42,7 +44,7 @@ function setup() {
   button.mousePressed(sendNewMessage); 
   noStroke();
   
-  network = new Network(textDatabase, fontSize, curveRadius, towerImg);
+  network = new Network(textDatabase, fontSize, curveRadius, towerImgA, towerImgB);
   
   if (backgroundImg.width/backgroundImg.height > windowWidth/windowHeight){
     backgroundImg.resize(0, windowHeight);

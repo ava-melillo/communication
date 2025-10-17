@@ -1,6 +1,6 @@
 class Network {
 
-  constructor(textDatabase, fontSize, curveRadius, img){
+  constructor(textDatabase, fontSize, curveRadius, imgA, imgB){
   
     this.textDatabase = shuffle(textDatabase);
     this.fontSize = fontSize;
@@ -9,7 +9,7 @@ class Network {
     this.nColumns = 3;
     this.spacing_y = fontSize * 5 * windowWidth/1920;
     this.wires = [];
-    this.img = img
+    this.img = [imgA, imgB];
     
     for (let i = 0; i < this.nRows; i++) {
     
@@ -33,11 +33,11 @@ class Network {
     let transitionIndex = 0;
     let initialPosition_x = windowWidth/2 - this.spacing_x;
     
-    for (let a = 0; a < this.nColumns; a++){
+    for (let a = 0; a < this.nColumns - 1; a++){ 
     
-      image(this.img, windowWidth/2 - this.spacing_x/2 - this.img.width/2 + (a * this.spacing_x), 50);
+      image(this.img[a], windowWidth/2 - this.spacing_x/2 - this.img[a].width/2 + (a * this.spacing_x), 50);
+      //image(this.img[a],0, 0);
     }
-    
   
     for (let i = 0; i < this.nRows; i++){
       

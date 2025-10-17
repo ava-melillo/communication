@@ -21,4 +21,24 @@ var textDatabase = [
   "SEM MOVIMENTO NÃO HÁ VIDA",
   "chupa meu bucetao",
   "iiiiiiiiiiiii"
+  "digimonas",
+  "voce está comendo chocolate",
+  "pizza de lua",
+  "nao sei o que escrever kkkk desculpa",
+  "no que você está pensando?"
+  "JOGUE SILKSONG",
+  "e pegue e puxe e pegue e naipe e naipe naipe e naipe naipe",
+  "devaneios estranhos...",
+  "SKAAAAASJDHAKSHS FDSAJFHAFHDSH ",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  ""
 ];
