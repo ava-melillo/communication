@@ -3,7 +3,7 @@ class Network {
   constructor(textDatabase, fontSize, curveRadius, imgA, imgB){
   
     this.textDatabase = shuffle(textDatabase);
-    this.fontSize = fontSize;
+    this.fontSize = fontSize * (windowWidth/1920) * 1.1;
     this.curveRadius = curveRadius;
     this.nRows = 10 - floor((1080 - windowHeight)/120);
     this.nColumns = 3;
@@ -16,7 +16,7 @@ class Network {
       this.wires.push( new Wire( 
       
         this.textDatabase[i % this.textDatabase.length],
-        fontSize,
+        this.fontSize,
         curveRadius,
         windowWidth/2,
         this.curveRadius * -1 + (i * this.spacing_y) + 200 * (windowWidth/1920))
